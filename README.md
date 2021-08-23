@@ -2,17 +2,23 @@
 This pipeline describes automatic processesing of ONC video data to obtain sablefish count time series.  
 
 ## Instructions
-Below we describe the pipeline which was used via Terminal in Ubuntu 20.
+The below code is run via Linux Terminal (Ubuntu 20).
+
+
 
 ### Requirements
-- Python3, R (> 3)
-- We suggest creating a python [virtual environment](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/), say in `~/venv`, where to install all requirements.  
-
-*Step 1*: activate venv.
+- Python3 (>= 3.6), R (>= 3)
+- We suggest creating a python [virtual environment](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/), say in `~/venv`, where all python requirements are installed.  
+- Activate venv. Do all steps below while venv is activated.
+- Install YOLO, say in `~/`.
 
 pip requirements, ONC tokens, ...
 
 ```
-code here
+cd
+git clone https://github.com/ultralytics/yolov5
+cd yolov5
+pip install -r requirements.txt
+
 ```
 
