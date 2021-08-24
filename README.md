@@ -8,8 +8,8 @@ The code is run via Linux Terminal, CentOS Linux release 8.3.2011, on a Intel(R)
 ### Requirements
 - Python3 (>= 3.6), R (>= 3)
 - We suggest creating a python [virtual environment](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/), say in `/home/venv`, where all python requirements are installed.  
-- Activate venv. Do all steps below while venv is activated.
-- Install YOLO, say in `/home`
+- Activate venv.
+- Install YOLO, say in `/home`, (venv on)
 
 ```
 cd /home
@@ -79,6 +79,6 @@ python3 track_centroid_euclidean.py -e -m 5 -o /home/analysis-of-ONC-video-data/
 TODO
 
 ```
-- Done ! You have spared yourself visualization of over 650 hours of video material and manual counting of over 200000 sablefishes ! You can be happy ;)
+- Done ! You have spared yourself visualization of over 650 hours of video material and manual counting of over 200000 sablefishes ! ;)
 
 <sup>1</sup>YOLO weights were obtained from a previous training on a [Colab notebook](https://colab.research.google.com/drive/1vRow0T33ij4U7YoS8yykvmGwV_WtYWq8#scrollTo=944LVEHATyQX&uniqifier=8) using data from [here](TODO). Beware that a YOLO training cannot be seeded, therefore repeating the training will lead to slightly different weights.
