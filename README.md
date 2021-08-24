@@ -65,6 +65,7 @@ cp -r /home/yolov5/runs/detect/* back_up/
 ```
 python3 track_centroid_euclidean.py -e
 ```
+
 - Also do a sensitivity analysis by varying parameter "m"
 
 ```
@@ -73,10 +74,15 @@ python3 track_centroid_euclidean.py -e -m 4 -o /home/analysis-of-ONC-video-data/
 python3 track_centroid_euclidean.py -e -m 5 -o /home/analysis-of-ONC-video-data/ONC_video_tracks_m5
 ```
 
+-- To visualize tracking in a particular video do:
+```
+python3 track_centroid_euclidean.py -e -v
+```
+
 - Run R script to print count time-series
 
 ```
-TODO
+Rscript ts_analysis.R
 
 ```
 - Done ! You have spared yourself visualization of over 650 hours of video material and manual counting of over 200000 sablefishes ! ;)
