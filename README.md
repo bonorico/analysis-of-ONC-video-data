@@ -87,4 +87,4 @@ Rscript ts_analysis.R
 ```
 - Done ! You have spared yourself visualization of over 650 hours of video material and manual counting of over 200000 sablefishes ! ;)
 
-<sup>1</sup>YOLO weights were obtained from a previous training on a [Colab notebook](https://colab.research.google.com/drive/1vRow0T33ij4U7YoS8yykvmGwV_WtYWq8#scrollTo=944LVEHATyQX&uniqifier=8) using data from [here](TODO). Beware that a YOLO training cannot be seeded, therefore repeating the training will lead to slightly different weights.
+<sup>1</sup>YOLO weights were obtained from a previous training on a [Colab notebook](https://colab.research.google.com/drive/1vRow0T33ij4U7YoS8yykvmGwV_WtYWq8#scrollTo=944LVEHATyQX&uniqifier=8) using data from [here](https://drive.google.com/drive/folders/10JtFCofWq16-foQFiOlTCQk4bXk2Vom7?usp=sharing). Beware that a YOLO training cannot be seeded, therefore repeating the training will lead to slightly different weights.
