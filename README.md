@@ -2,7 +2,7 @@
 This pipeline describes the automatic processesing of ONC video data collected during an observational study in Barkley Canyon (off Vancouver Island) over a four months period and consisting of short video clips recorded hourly at three different Canyon sites. The pipeline consists of automatically detecting and counting sablefishes appearing in the videos and obtaining the respective count time series.  
 
 ## Instructions
-The code is run via Linux Terminal, CentOS Linux release 8.3.2011, on a Intel(R) Core(TM) i7-4800MQ CPU @ 2.70GHz. Equally Ubuntu 20 OS can be used on other hardware specifics. No paralell computations are performed. 
+The code is run via Linux Terminal, CentOS Linux release 8.3.2011, on a Intel(R) Core(TM) i7-4800MQ CPU @ 2.70GHz computer. Equally Ubuntu 20 OS can be used on other hardware specifics. No paralell computations are performed. 
  
 
 ### Requirements
