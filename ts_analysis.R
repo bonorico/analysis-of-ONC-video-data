@@ -27,7 +27,7 @@ sd(subcamc)
 summary(lm(as.numeric(dragonc)~as.numeric(time(dragonc))))
 summary(lm(as.numeric(subcamc)~as.numeric(time(subcamc))))
 
-
+devs <- c("Upper Slope", "Node", "Axis") # rename levels
 ############## MAIN result ###############
 
 png("counts_2.png", width = 4000, height = 2000)
