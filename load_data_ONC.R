@@ -1,10 +1,20 @@
+library(xts)
+library(zoo)
+library(tidyverse)
+
+split_path <- function(path) {
+  if (dirname(path) %in% c(".", path)) return(basename(path))
+  return(c(basename(path), split_path(dirname(path))))
+}
 
 # upload 4 months time series on low res images
 
-hy = 365*24 # hours in one year
-hm = hy/12 # hours in one month
+                                        # file names path
+data_dir <- paste(rev(split_path(getwd())[-1]), collapse = "/")  #  "./"
+data_patt <- "_reproduce"   # "ONC_video_tracks"
 
-hm = 24 # use dayly time scale to compare with bait release
+all_data <- grep(data_patt, list.files(path = data_dir), value = TRUE)[c(4,1:3)]
+
 
 # funtion to load data
 loadd <- function(path, subgr = "DRAGONFISHSUBC13112", ctresh = 130, hm = 24 )
@@ -25,7 +35,7 @@ loadd <- function(path, subgr = "DRAGONFISHSUBC13112", ctresh = 130, hm = 24 )
     length(counts$filesize[counts$filesize > 50])
     table(counts[counts$filesize > 50, "camera"])
     summary(counts$filesize[counts$filesize > 50])
-    hist(counts$filesize[counts$filesize > 50])
+   # hist(counts$filesize[counts$filesize > 50])  # error if data is empty
 
     summary(counts$count)
 
@@ -72,8 +82,8 @@ loadd <- function(path, subgr = "DRAGONFISHSUBC13112", ctresh = 130, hm = 24 )
         ths[[i]] <- obn[[i]]*4/60                                      # total hours recorded 
         ors[[i]] <- obn[[i]]/sph[[i]]                                  #  observation fraction: ca 1 (every hour)
         
-        cts[[i]] <- ts(subset(counts, camera == i, select = "count"), # counts time series
-                       start = 0, frequency = hm)
+        cts[[i]] <- xts(subset(counts, camera == i, select = "count"), # counts time series
+                       order.by = hs[[i]])
         tis[[i]] <- as.numeric(diff(hs[[i]]))/60/60                     # observation time-intervals in hours
     }
 
@@ -101,17 +111,19 @@ loadd <- function(path, subgr = "DRAGONFISHSUBC13112", ctresh = 130, hm = 24 )
 
 }
 
-m2 <- loadd("ONC_video_tracks.txt", "AXIS", 0)
-m3 <- loadd("ONC_video_tracks_m3.txt")
-m4 <- loadd("ONC_video_tracks_m4.txt")
-m5 <- loadd("ONC_video_tracks_m5.txt")
 
-M <- list(m3, m4, m5)
-
+M <- lapply(1:4,
+            function(i){
+                if (i == 1)
+                    loadd(file.path(data_dir, all_data[i]), "AXIS", 0)
+                else
+                    loadd(file.path(data_dir, all_data[i]))
+            }  )
+names(M) <- as.character(2:5)
 
 # validation manual counts
 
-manualc_raw <- read.csv("barkley_node_sablefish manual counts.csv")
+manualc_raw <- read.csv(file.path(data_dir, "barkley_node_sablefish manual counts.csv"))
 
 manualc_raw$time <- as.POSIXct(
     sapply(manualc_raw$time,
@@ -124,13 +136,30 @@ manualc_raw$time <- as.POSIXct(
            }
            ),
     format = "%Y-%m-%d  %H:%M:%S", tz = "PDT")
-                
+
 manualc_raw <- manualc_raw[order(manualc_raw$time), ]
 
 tail(manualc_raw$time[], n = 1) - manualc_raw$time[1]
 
-manualc <- ts(manualc_raw$sable, start = 0, frequency = hm)
+manualc <- xts(manualc_raw$sable, order.by = manualc_raw$time)
 
 plot(manualc)
 
+#
+
+manualc_rest <- lapply(c("axis", "slope"), function(d)
+    read.csv(file.path(data_dir, paste0("manual_counts_", d,".csv")))
+    )
+names(manualc_rest) <- c("axis", "slope")
+
+manualc_rest <- lapply(manualc_rest,
+                       function(x)
+                       {                      
+                           countcol <- grep("sablefish", names(x), value = TRUE)
+                           x$time <- as.POSIXct(
+                               paste(x$date, x$annotation, sep = " "),
+                               format = "%m/%d/%Y  %H:%M:%S", tz = "PDT")
+                           dat <- x[!is.na(x$time), ]
+                           xts(dat[[countcol]], order.by = dat$time)                           
+                       } )
 
