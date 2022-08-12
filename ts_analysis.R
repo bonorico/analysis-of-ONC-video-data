@@ -53,38 +53,46 @@ summary(lm(as.numeric(manualc_rest$axis)~as.numeric(time(manualc_rest$axis)), na
 devs <- c("Upper Slope", "Node", "Axis") # rename levels
 ############## MAIN result ###############
 
-png("counts_2.png", width = 600)
+# resolution
+
+resol <- 300
+w <- 26
+h <- 14
+cxa <- 1.5
+cxl <- 1.7
+cxm <- 2.5
+#
+jpeg("Figure_5.jpeg", units="in", width= w, height= h, res= resol)
 
 par(mfrow = c(2, 1))
-par(cex.lab = 1.2)
-plot(dragonc, xlab = ifelse(M[["2"]]$ts_freq < 30, "Day", "Month"), ylab = "Counts (Proxy)", main = "", lwd = 2, cex.axis = 1.2)
-title("A", cex.main = 1.5)
-plot(subcamc, xlab = ifelse(M[["2"]]$ts_freq < 30, "Day", "Month"), ylab = "Counts (Proxy)", main = "", lwd = 2, cex.axis = 1.2)
-title("B", cex.main = 1.5)
+par(cex.lab = cxl)
+plot(dragonc, xlab = ifelse(M[["2"]]$ts_freq < 30, "Day", "Month"), ylab = "Counts (Proxy)", main = "", lwd = 2, cex.axis = cxa)
+title("A", cex.main = cxm)
+plot(subcamc, xlab = ifelse(M[["2"]]$ts_freq < 30, "Day", "Month"), ylab = "Counts (Proxy)", main = "", lwd = 2, cex.axis = cxa)
+title("B", cex.main = cxm)
 
 dev.off()
+
                                         #
-
-png("counts_4.png", width = 600)
+jpeg("Figure_6.jpeg", units="in", width= w, height= h, res= resol)
 
 par(mfrow = c(2, 1))
-par( cex.lab = 1.2)
-plot(dragonc, xlab = ifelse(M[["2"]]$ts_freq < 30, "Day", "Month"), ylab = "Counts (Proxy)", main = "", lwd = 2, cex.axis = 1.2)
-title("A", cex.main = 1.5)
-plot(manualc, xlab = ifelse(M[["2"]]$ts_freq < 30, "Day", "Month"), ylab = "Counts (Proxy)", col = "red", main = "", lwd = 2, cex.axis = 1.2)
-title("B", cex.main = 1.5)
+par(cex.lab = cxl)
+plot(dragonc, xlab = ifelse(M[["2"]]$ts_freq < 30, "Day", "Month"), ylab = "Counts (Proxy)", main = "", lwd = 2, cex.axis = cxa)
+title("A", cex.main = cxm)
+plot(manualc, xlab = ifelse(M[["2"]]$ts_freq < 30, "Day", "Month"), ylab = "Counts (Proxy)", col = "red", main = "", lwd = 2, cex.axis = cxa)
+title("B", cex.main = cxm)
 
 dev.off()
 
-
-png("counts_4b.png", width = 600)
+jpeg("Figure_7.jpeg", units="in", width= w, height= h, res= resol)
 
 par(mfrow = c(2, 1))
-par( cex.lab = 1.2 )
-plot(subcamc_short, xlab = ifelse(M[["2"]]$ts_freq < 30, "Day", "Month"), ylab = "Counts (Proxy)", main = "", lwd = 2, cex.axis = 1.2)
-title("A", cex.main = 1.5)
-plot(manualc_rest$axis, xlab = ifelse(M[["2"]]$ts_freq < 30, "Day", "Month"), ylab = "Counts (Proxy)", col = "red", main = "", lwd = 2, cex.axis = 1.2)
-title("B", cex.main = 1.5)
+par( cex.lab = cxl )
+plot(subcamc_short, xlab = ifelse(M[["2"]]$ts_freq < 30, "Day", "Month"), ylab = "Counts (Proxy)", main = "", lwd = 2, cex.axis = cxa)
+title("A", cex.main = cxm)
+plot(manualc_rest$axis, xlab = ifelse(M[["2"]]$ts_freq < 30, "Day", "Month"), ylab = "Counts (Proxy)", col = "red", main = "", lwd = 2, cex.axis = cxa)
+title("B", cex.main = cxm)
 
 dev.off()
 
@@ -110,12 +118,12 @@ multic <- lapply(2:3, function(s)
 names(multic) <- c("node", "axis")
 
 
-png("counts_5.png", width = 600, height = 550)
+jpeg("Figure_8.jpeg", units="in", width= w, height= 18, res= resol)
 
 par(mfrow = c(2, 1))
-par(cex.axis = 1.2, cex.lab = 1.2, cex.main = 1.5 )
+par(cex.axis = cxa, cex.lab = cxl, cex.main = cxm )
 plot.zoo(multic$node, plot.type = "single", xlab = "Month", ylab = "Counts (Proxy)", main = "A", lwd = 2, col = 1:4)
-legend("topleft", paste("m", 2:5, sep = "="), col = 1:4, lty = rep(1,4), lwd = rep(2,4), bty = "n", cex = 1.2)
+legend("topleft", paste("m", 2:5, sep = "="), col = 1:4, lty = rep(1,4), lwd = rep(2,4), bty = "n", cex = cxm)
 plot.zoo(multic$axis, plot.type = "single", xlab = "Month", ylab = "Counts (Proxy)", main = "B", lwd = 2, col = 1:4)
 
 dev.off()
