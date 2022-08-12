@@ -40,7 +40,7 @@ Always in Terminal and with venv on. Run the following commands. Beware: conside
 
 ```
 cd analysis-of-ONC-video-data
-python3 block_download.py -t <your_toke_here>
+python3 block_download.py -t <your_token_here>
 ```
 
 - Reduce size of downloaded data. Adjust paths if needed. For help do python3 block_process.py  --h
